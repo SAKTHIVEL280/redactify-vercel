@@ -246,22 +246,24 @@ function App() {
               </span>
             )}
 
-            {currentView === 'redactor' && (
+            {/* Mobile: Single Menu Button for both Sidebar and Navigation */}
+            {currentView === 'redactor' ? (
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="lg:hidden p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
+                title="Open Analysis"
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setShowMobileMenu(true)}
+                className="sm:hidden p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
+                title="Open Menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
             )}
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setShowMobileMenu(true)}
-              className="sm:hidden p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
           </div>
         </div>
       </nav>

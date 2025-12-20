@@ -229,6 +229,7 @@ Sidebar.propTypes = {
   onUpgradeClick: PropTypes.func,
   uploadedFile: PropTypes.object,
   fileType: PropTypes.oneOf(['pdf', 'docx', 'txt']),
+  onClose: PropTypes.func,
 };
 
 export default Sidebar;
