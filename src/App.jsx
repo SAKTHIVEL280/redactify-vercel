@@ -10,6 +10,7 @@ import CookieBanner from './components/CookieBanner';
 import BatchProcessor from './components/BatchProcessor';
 import CustomRulesManager from './components/CustomRulesManager';
 import FeedbackModal from './components/FeedbackModal';
+import MobileMenu from './components/MobileMenu';
 import { verifyProStatus } from './utils/proLicenseDB';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const [showBatchProcessor, setShowBatchProcessor] = useState(false);
   const [showCustomRules, setShowCustomRules] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isPro, setIsPro] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -247,11 +249,19 @@ function App() {
             {currentView === 'redactor' && (
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden p-2 text-white"
+                className="lg:hidden p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
               >
-                {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <Menu className="w-5 h-5" />
               </button>
             )}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setShowMobileMenu(true)}
+              className="sm:hidden p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </nav>
@@ -334,6 +344,41 @@ function App() {
           onClose={() => setShowCustomRules(false)}
         />
       )}
+
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={showMobileMenu}
+        onClose={() => setShowMobileMenu(false)}
+        currentView={currentView}
+        isPro={isPro}
+        onNavigate={(action) => {
+          switch (action) {
+            case 'home':
+              handleGoToLanding();
+              break;
+            case 'batch':
+              setShowBatchProcessor(true);
+              break;
+            case 'rules':
+              setShowCustomRules(true);
+              break;
+            case 'privacy':
+              setShowPrivacy(true);
+              break;
+            case 'feedback':
+              setShowFeedback(true);
+              break;
+            case 'recover':
+              setShowRecovery(true);
+              break;
+            case 'upgrade':
+              setShowProModal(true);
+              break;
+            default:
+              break;
+          }
+        }}
+      />
 
       {/* Cookie Banner */}
       <CookieBanner />
