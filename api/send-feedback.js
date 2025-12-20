@@ -42,7 +42,7 @@ Timestamp: ${new Date().toISOString()}
     // Send email using Resend
     const data = await resend.emails.send({
       from: 'Redactify <onboarding@resend.dev>', // Using Resend's onboarding domain (works immediately)
-      to: [process.env.FEEDBACK_EMAIL || 'your-email@example.com'], // Set FEEDBACK_EMAIL in Vercel env vars
+      to: ['sakthivel.hsr06@gmail.com'], // Your email for receiving feedback
       replyTo: email || undefined,
       subject: `[Redactify] ${feedbackTypeLabels[type]}: ${subject || 'No subject'}`,
       text: emailContent,
